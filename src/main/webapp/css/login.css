@@ -1,0 +1,22 @@
+.login-container {
+	/* border: 2px solid black; */
+	min-height: 330px;
+	width: 100%;
+	padding: 20px 50px 30px 50px;
+	background-image: linear-gradient(rgb(230,230,230),rgb(255,255,255));
+}
+
+@media(max-width: 786px) {
+	.login-form {
+		width: 80%;
+	}
+}
+
+.login-form {
+	width: 60%;
+}
+
+
+
+
+
