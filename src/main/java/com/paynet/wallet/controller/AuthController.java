@@ -71,9 +71,4 @@ public class AuthController {
 		return "redirect:home";
 	}
 	
-	@GetMapping(value="/home")
-	public String homePage() {
-		return "home";
-	}
-	
 }

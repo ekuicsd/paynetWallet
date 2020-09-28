@@ -20,7 +20,9 @@
 <% HttpSession session1 = request.getSession();
 	User user = (User) session1.getAttribute("user"); 
 	System.out.println(user);
-	
+	if(user == null) {
+		response.sendRedirect(request.getContextPath()+"/login");
+	}
 	String errorMessage = (String)request.getAttribute("errorMessage");
 %>
 	
@@ -33,16 +35,16 @@
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
-				<h1 class="text-center">Add Money to Wallet</h1>
+				<h1 class="text-center mb-4">Add Money to Wallet</h1>
 				<%if(errorMessage != null) { %>
 				<div class="alert alert-danger" role="alert">
 				  <%= errorMessage %>
 				</div>
 				<% } %>
-				<form method="post" action="">
+				<form method="post" action="/addMoney">
 					<div class="row">
 						<div class="col-12">
-							<div class="form-group mt-5">
+							<div class="form-group">
 								<label for="cardno">Card Number : </label> 
 								<input
 								class="input0 form-control" type="text" id="cardno" name="cardNumber"
@@ -74,14 +76,14 @@
 								<label for="yr">Year : </label> 
 								<input
 								class="input0 form-control" type="text" id="yr" name="year"
-								placeholder="YY" required />
+								placeholder="YYYY" required />
 							</div>
 						</div>
 						<div class="col-4">
 							<div class="form-group">
 								<label for="cvv">CVV : </label> 
 								<input
-								class="input0 form-control" type="text" id="cvv" name="cvv"
+								class="input0 form-control" type="password" id="cvv" name="cvv"
 								placeholder="CVV" required />
 							</div>
 						</div>

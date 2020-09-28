@@ -18,7 +18,11 @@
 <body>
 <% HttpSession session1 = request.getSession();
 	User user = (User) session1.getAttribute("user"); 
-	System.out.println(user); %>
+	System.out.println(user);
+	if(user == null) {
+		response.sendRedirect(request.getContextPath()+"/login");
+	}
+%>
 
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>

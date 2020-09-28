@@ -20,7 +20,9 @@
 <% HttpSession session1 = request.getSession();
 	User user = (User) session1.getAttribute("user"); 
 	System.out.println(user);
-	
+	if(user == null) {
+		response.sendRedirect(request.getContextPath()+"/login");
+	}
 	String errorMessage = (String)request.getAttribute("errorMessage");
 %>
 	

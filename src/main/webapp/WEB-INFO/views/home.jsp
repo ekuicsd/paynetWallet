@@ -1,3 +1,5 @@
+<%@ page import = "javax.servlet.http.HttpSession" %>
+<%@ page import = "com.paynet.wallet.model.User" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,6 +16,15 @@
 
 </head>
 <body>
+<% HttpSession session1 = request.getSession();
+	User user = (User) session1.getAttribute("user"); 
+	System.out.println(user); 
+	if(user == null) {
+		response.sendRedirect(request.getContextPath()+"/login");
+	}
+%>
+	
+	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
 	  <a>Logout</a>

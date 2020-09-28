@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 import com.paynet.wallet.util.TransactionType;
 
@@ -25,9 +26,13 @@ public class Transactions {
 	@Enumerated(EnumType.STRING)
 	private TransactionType transactionType;
 	private long amount;
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 	private Date dateOfTransaction;
 	private long balance;
 	
+	@PrePersist
+	protected void onCreate() {
+		dateOfTransaction = new Date();
+	}
 }
