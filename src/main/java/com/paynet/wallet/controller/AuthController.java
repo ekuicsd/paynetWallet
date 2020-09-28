@@ -1,12 +1,14 @@
 package com.paynet.wallet.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.paynet.wallet.model.User;
 import com.paynet.wallet.service.AuthService;
 
 @Controller
@@ -30,18 +32,48 @@ public class AuthController {
 	}
 	
 	@PostMapping(value="/signup")
-	public String login(ModelMap model,@RequestParam("name") String name,
-			@RequestParam("phoneNumber") long phoneNumber, @RequestParam("password") String password) {
+	public String login(ModelMap model, HttpServletRequest request) {
+		String name = request.getParameter("name");
+		long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
+		String password = request.getParameter("password");
 		if(!authService.CheckPhoneNumberAndPassword(phoneNumber, password)){
 			 model.addAttribute("errorMessage", "Invalid Credentials");
-	         return "/signup";
+	         return "signup";
 		} 
 		if(authService.checkUserExists(phoneNumber).isPresent()) {
 			 model.addAttribute("errorMessage", "User Already Exists");
-	         return "/signup";
+	         return "signup";
 		}
-		authService.createUser(name, phoneNumber, password);
-		return "/login";
+		User user = authService.createUser(name, phoneNumber, password);
+		request.getSession().setAttribute("user",user);
+		return "redirect:home";
 	}
-
+	
+	
+	@PostMapping(value="/login")
+	public String signup(ModelMap model, HttpServletRequest request) {
+		long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
+		String password = request.getParameter("password");
+		if(!authService.CheckPhoneNumberAndPassword(phoneNumber, password)){
+			 model.addAttribute("errorMessage", "Invalid Credentials");
+	         return "login";
+		} 
+		if(!authService.checkUserExists(phoneNumber).isPresent()) {
+			 model.addAttribute("errorMessage", "User does not exists");
+	         return "login";
+		}
+		if(!authService.isExistByPhoneNumberAndPasword(phoneNumber, password)) {
+			 model.addAttribute("errorMessage", "Password does not match");
+			return "login";
+		}
+		User user = authService.findByPhoneNumber(phoneNumber);
+		request.getSession().setAttribute("user",user);
+		return "redirect:home";
+	}
+	
+	@GetMapping(value="/home")
+	public String homePage() {
+		return "home";
+	}
+	
 }

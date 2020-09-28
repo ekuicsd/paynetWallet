@@ -15,21 +15,29 @@
 
 </head>
 <body>
+<%String errorMessage = (String)request.getAttribute("errorMessage"); %>
+
+
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
 				<h1 class="text-center">Login</h1>
-				<form method="post" action="">
+				<%if(errorMessage != null) { %>
+				<div class="alert alert-danger" role="alert">
+				  <%= errorMessage %>
+				</div>
+				<% } %>
+				<form method="post" action="/login">
 					<div class="form-group">
 						<label for="phno">Phone Number : </label> 
 						<input
-						class="input0 form-control" type="text" id="phno" name="phno"
+						class="input0 form-control" type="text" id="phno" name="phoneNumber"
 						placeholder="Enter phone number" required />
 					</div>
 					<div class="form-group">
 					<label for="pwd">Password : </label> 
 						<input class=" form-control"
-						type="password" id="pwd" name="pwd" placeholder="Enter Password"
+						type="password" id="pwd" name="password" placeholder="Enter Password"
 						required />
 					</div>
 					<div class="form-group">

@@ -41,4 +41,18 @@ public class AuthService {
 		user.setPassword(passwordEncoder.encode(password));
 		return userRepository.save(user);
 	}
+	
+	@Transactional
+	public boolean isExistByPhoneNumberAndPasword(long phoneNumber, String password) {
+		Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
+		boolean isPasswordMatch = passwordEncoder.matches(password, user.get().getPassword());
+		System.out.println(isPasswordMatch);
+		return isPasswordMatch;
+	}
+	
+	public User findByPhoneNumber(long phoneNumber) {
+		return userRepository.findByPhoneNumber(phoneNumber).get();
+	}
+	
+	
 }
