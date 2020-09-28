@@ -40,3 +40,8 @@ a:hover {
 	cursor: pointer;
 	text-decoration: none;
 }
+
+.float-left, .float-left:hover {
+	color: black;
+	
+}

@@ -15,7 +15,9 @@
 
 </head>
 <body>
-<%String errorMessage = (String)request.getAttribute("errorMessage"); %>
+<%
+	String errorMessage = (String)request.getAttribute("errorMessage"); 
+%>
 
 
 	<div class="container-fluid bg">
@@ -39,6 +41,7 @@
 						<input class=" form-control"
 						type="password" id="pwd" name="password" placeholder="Enter Password"
 						required />
+						<small class="text-muted">Password should be atleast 6 characters long</small>
 					</div>
 					<div class="form-group">
 						<button class="btn btn-info float-right" type="submit">
@@ -50,5 +53,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		
+	</script>
 </body>
 </html>

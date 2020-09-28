@@ -46,12 +46,14 @@
 						<input class=" form-control"
 						type="password" id="pwd" name="password" placeholder="Enter Password"
 						required />
+						<small class="text-muted">Password should be atleast 6 characters long</small>
 					</div>
 					<div class="form-group">
 						<button class="btn btn-info float-right" type="submit">
 							Sign Up
 						</button>
 					</div>
+					<p class="text-center mb-0" style="margin-top: 70px;"><a href="/login" >Back to login </a></p>
 				</form>
 			</div>
 		</div>

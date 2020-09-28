@@ -31,13 +31,18 @@
 
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
-	  <a>Logout</a>
+	    <a href="/logout">Logout</a>
 	</nav>
 	
 	<div class="container">
 		<div class="row">
 			<div class="col table-responsive">
-				<h1 class="mt-4 text-center">Your Transactions</h1>
+				<h1 class="mt-4 text-center">
+					<a class="float-left" href="/home">
+						<i class="material-icons" style="font-size:36px">arrow_back</i>
+					</a>
+					Your Transactions
+				</h1>
 				<table class="table table-hover table-striped mt-4">
 				  <thead>
 				    <tr>
@@ -61,5 +66,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

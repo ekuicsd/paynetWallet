@@ -1,6 +1,7 @@
 package com.paynet.wallet.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +70,13 @@ public class AuthController {
 		User user = authService.findByPhoneNumber(phoneNumber);
 		request.getSession().setAttribute("user",user);
 		return "redirect:home";
+	}
+	
+	@GetMapping(value="/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		session.setAttribute("user", null);
+		return "redirect:login";
 	}
 	
 }

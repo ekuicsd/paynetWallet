@@ -27,7 +27,7 @@
 	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
-	  <a>Logout</a>
+	  <a href="/logout">Logout</a>
 	</nav>
 	
 	<div class="container">
@@ -60,5 +60,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

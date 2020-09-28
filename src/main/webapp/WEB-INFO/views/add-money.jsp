@@ -29,13 +29,18 @@
 	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
-	  <a>Logout</a>
+	  <a href="/logout">Logout</a>
 	</nav>
 	
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
-				<h1 class="text-center mb-4">Add Money to Wallet</h1>
+				<h1 class="text-center mb-4">
+					<a class="float-left" href="/home">
+						<i class="material-icons" style="font-size:36px">arrow_back</i>
+					</a>
+					Add Money to Wallet
+				</h1>
 				<%if(errorMessage != null) { %>
 				<div class="alert alert-danger" role="alert">
 				  <%= errorMessage %>
@@ -77,6 +82,7 @@
 								<input
 								class="input0 form-control" type="text" id="yr" name="year"
 								placeholder="YYYY" required />
+								<small class="text-muted">Enter year in YYYY only</small>
 							</div>
 						</div>
 						<div class="col-4">
@@ -109,5 +115,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

@@ -29,13 +29,18 @@
 	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
-	  <a>Logout</a>
+	  <a href="/logout">Logout</a>
 	</nav>
 	
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
-				<h1 class="text-center mb-5">Transfer Money</h1>
+				<h1 class="text-center mb-5">
+					<a class="float-left" href="/home">
+						<i class="material-icons" style="font-size:36px">arrow_back</i>
+					</a>
+					Transfer Money
+				</h1>
 				<%if(errorMessage != null) { %>
 				<div class="alert alert-danger" role="alert">
 				  <%= errorMessage %>
@@ -63,5 +68,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>
