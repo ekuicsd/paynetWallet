@@ -1,5 +1,7 @@
 <%@ page import = "javax.servlet.http.HttpSession" %>
 <%@ page import = "com.paynet.wallet.model.User" %>
+<%@ page import = "com.paynet.wallet.model.Transactions" %>
+<%@ page import = "java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -22,6 +24,9 @@
 	if(user == null) {
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
+	
+	ArrayList<Transactions> list = (ArrayList<Transactions>) request.getAttribute("transactionsList");
+	System.out.println("all transactions" + list);
 %>
 
 	<nav class="navbar navbar-light bg-light justify-content-between">
@@ -36,7 +41,6 @@
 				<table class="table table-hover table-striped mt-4">
 				  <thead>
 				    <tr>
-				      <th scope="col">Sr No.</th>
 				      <th scope="col">Time</th>
 				      <th scope="col">Transaction type</th>
 				      <th scope="col">Amount</th>
@@ -44,13 +48,14 @@
 				    </tr>
 				  </thead>
 				  <tbody>
+				  <% for(Transactions t: list) { %>
 				    <tr>
-				      <th>1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>@mdo</td>
+				      <td><%= t.getDateOfTransaction() %></td>
+				      <td><%= t.getTransactionType() %></td>
+				      <td>Rs. <%= t.getAmount() %></td>
+				      <td>Rs. <%= t.getBalance() %></td>
 				    </tr>
+				    <% } %>
 				  </tbody>
 				</table>
 			</div>

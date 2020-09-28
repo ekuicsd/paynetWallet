@@ -1,5 +1,6 @@
 package com.paynet.wallet.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,13 @@ public class UserService {
 	public void updateWallet(User user, long amount) {
 		user.setWallet(user.getWallet() + amount);
 		userRepository.save(user);
+	}
+	
+	public ArrayList<Transactions> findAllTransactions(User user) {
+		ArrayList<Transactions> list= new ArrayList<Transactions>();
+		list = transactionRepository.findAllByUser(user);
+		System.out.println("service " + list);
+		return list;
 	}
  
 }

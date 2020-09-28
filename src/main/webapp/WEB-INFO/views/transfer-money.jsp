@@ -35,18 +35,24 @@
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
-				<h1 class="text-center">Transfer Money</h1>
+				<h1 class="text-center mb-5">Transfer Money</h1>
 				<%if(errorMessage != null) { %>
 				<div class="alert alert-danger" role="alert">
 				  <%= errorMessage %>
 				</div>
 				<% } %>
-				<form method="post" action="">
-					<div class="form-group mt-5">
+				<form method="post" action="/transferMoney">
+					<div class="form-group">
 						<label for="phno">Phone Number : </label> 
 						<input
 						class="input0 form-control" type="text" id="phno" name="phoneNumber"
 						placeholder="Enter phone number" required />
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount : </label> 
+						<input
+						class="input0 form-control" type="text" id="amount" name="amount"
+						placeholder="Enter amount to transfer" required />
 					</div>
 					<div class="form-group mt-5">
 						<button class="btn btn-info float-right" type="submit">

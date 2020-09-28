@@ -1,5 +1,7 @@
 package com.paynet.wallet.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.paynet.wallet.model.Transactions;
 import com.paynet.wallet.model.User;
+import com.paynet.wallet.service.AuthService;
 import com.paynet.wallet.service.UserService;
 import com.paynet.wallet.util.TransactionType;
 
@@ -17,9 +21,12 @@ public class UserController {
 	
 	@Autowired
 	private final UserService userService;
+	@Autowired
+	private final AuthService authService;
 	
-	public UserController(UserService userService) {
+	public UserController(UserService userService, AuthService authService) {
 		this.userService = userService;
+		this.authService = authService;
 	}
 	
 	@GetMapping(value="/home")
@@ -38,7 +45,10 @@ public class UserController {
 	}
 	
 	@GetMapping(value="/transactions")
-	public String transactionPage() {
+	public String transactionPage(ModelMap model, HttpServletRequest request) {
+		ArrayList<Transactions> list = userService.findAllTransactions((User)request.getSession().getAttribute("user"));
+		System.out.println("controller " + list);
+		 model.addAttribute("transactionsList", list);
 		return "transactions";
 	}
 	
@@ -59,4 +69,34 @@ public class UserController {
 		userService.addMoney((User)request.getSession().getAttribute("user"), TransactionType.ADD_MONEY, amount);
 		return "redirect:home";
 	}
+	
+	@PostMapping(value="/transferMoney")
+	public String transferMoney(ModelMap model, HttpServletRequest request) {
+		User user = (User)request.getSession().getAttribute("user");
+		long phoneNumber = Long.parseLong(request.getParameter("phoneNumber"));
+		long amount = Long.parseLong(request.getParameter("amount"));
+		if(user.getPhoneNumber() == phoneNumber) {
+			model.addAttribute("errorMessage", "Please enter valid phone number!");
+			return "transfer-money";
+		} else if(amount <= 0) {
+			model.addAttribute("errorMessage", "Please enter amount to transfer!");
+			return "transfer-money";
+		} else if(!authService.checkUserExists(phoneNumber).isPresent()) {
+			model.addAttribute("errorMessage", "You entered wrong phone Number!");
+			return "transfer-money";
+		} else if(user.getWallet() < amount ) {
+			model.addAttribute("errorMessage", "You not have enough balance in your wallet!");
+			return "transfer-money";
+		}
+		User user1 = authService.findByPhoneNumber(phoneNumber);
+		userService.addMoney(user, TransactionType.DEBITED, amount * -1);
+		userService.addMoney(user1, TransactionType.CREDITED, amount);
+		return "redirect:home";
+	}
+	
 }
+
+
+
+
+
