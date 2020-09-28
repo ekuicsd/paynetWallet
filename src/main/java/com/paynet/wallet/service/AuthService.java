@@ -46,7 +46,6 @@ public class AuthService {
 	public boolean isExistByPhoneNumberAndPasword(long phoneNumber, String password) {
 		Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
 		boolean isPasswordMatch = passwordEncoder.matches(password, user.get().getPassword());
-		System.out.println(isPasswordMatch);
 		return isPasswordMatch;
 	}
 	

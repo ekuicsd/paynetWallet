@@ -19,7 +19,6 @@
 	String errorMessage = (String)request.getAttribute("errorMessage"); 
 %>
 
-
 	<div class="container-fluid bg">
 		<div class="row login-form bottomShadow">
 			<div class="login-container">
@@ -53,9 +52,5 @@
 			</div>
 		</div>
 	</div>
-	
-	<script>
-		
-	</script>
 </body>
 </html>

@@ -47,7 +47,6 @@ public class UserController {
 	@GetMapping(value="/transactions")
 	public String transactionPage(ModelMap model, HttpServletRequest request) {
 		ArrayList<Transactions> list = userService.findAllTransactions((User)request.getSession().getAttribute("user"));
-		System.out.println("controller " + list);
 		 model.addAttribute("transactionsList", list);
 		return "transactions";
 	}
@@ -61,12 +60,12 @@ public class UserController {
 		String cvv = request.getParameter("cvv");
 		long amount = Long.parseLong(request.getParameter("amount"));
 		String errorMessage = userService.checkAddMoneyDetails(cardNumber, name, month, year, cvv, amount);
-		System.out.println(errorMessage);
 		if(errorMessage != null) {
 			 model.addAttribute("errorMessage", errorMessage);
 			 return "add-money";
 		}
-		userService.addMoney((User)request.getSession().getAttribute("user"), TransactionType.ADD_MONEY, amount);
+		User user = userService.addMoney((User)request.getSession().getAttribute("user"), TransactionType.ADD_MONEY, amount);
+		request.getSession().setAttribute("user", user);
 		return "redirect:home";
 	}
 	
@@ -89,8 +88,9 @@ public class UserController {
 			return "transfer-money";
 		}
 		User user1 = authService.findByPhoneNumber(phoneNumber);
-		userService.addMoney(user, TransactionType.DEBITED, amount * -1);
+		User fuser = userService.addMoney(user, TransactionType.DEBITED, amount * -1);
 		userService.addMoney(user1, TransactionType.CREDITED, amount);
+		request.getSession().setAttribute("user", fuser);
 		return "redirect:home";
 	}
 	

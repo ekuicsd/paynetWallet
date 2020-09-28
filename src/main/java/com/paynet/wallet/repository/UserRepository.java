@@ -11,5 +11,7 @@ import com.paynet.wallet.model.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	
 	Optional<User> findByPhoneNumber(long phoneNumber);
+	
+	User save(User user);
 
 }

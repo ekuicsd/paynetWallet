@@ -79,4 +79,9 @@ public class AuthController {
 		return "redirect:login";
 	}
 	
+	@GetMapping(value="/error")
+	public String error() {
+		return "redirect:error";
+	}
+	
 }

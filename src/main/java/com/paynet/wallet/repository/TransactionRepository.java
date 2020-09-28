@@ -13,4 +13,6 @@ public interface TransactionRepository extends CrudRepository<Transactions, Long
 
 	ArrayList<Transactions> findAllByUser(User user);
 	
+	Transactions save(Transactions transcation);
+	
 }

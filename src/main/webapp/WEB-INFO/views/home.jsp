@@ -27,10 +27,16 @@
 	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 	  <a class="navbar-brand" href="/home">Paynet Wallet</a>
-	  <a href="/logout">Logout</a>
+	 <a href="/logout">Logout</a>
 	</nav>
 	
 	<div class="container">
+	<%if(user != null) { %>
+	<p class="float-right">
+		<img src="assets/money.png" alt="" style="margin-bottom: 12px;">
+			<b style="font-size:27px;"> Rs. <%=user.getWallet() %> /-</b>
+	</p>
+	<% } %>
 		<h1 class="text-center mt-4">Paynet Wallet</h1>
 		<hr>
 		<div class="row mt-4">
@@ -60,6 +66,5 @@
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

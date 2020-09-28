@@ -42,27 +42,25 @@ public class UserService {
 		return null;
 	}
 	
-	public void addMoney(User user, TransactionType type, long amount) {
+	public User addMoney(User user, TransactionType type, long amount) {
 		Transactions transaction = new Transactions();
 		transaction.setTransactionType(type);
 		transaction.setAmount(amount);
 		transaction.setBalance(user.getWallet() + amount);
 		transaction.setUser(user);
 		transactionRepository.save(transaction);
-		updateWallet(user, amount);
-		
+		return updateWallet(user, amount);
 	}
 	
 	@Transactional
-	public void updateWallet(User user, long amount) {
+	public User updateWallet(User user, long amount) {
 		user.setWallet(user.getWallet() + amount);
-		userRepository.save(user);
+		return userRepository.save(user);
 	}
 	
 	public ArrayList<Transactions> findAllTransactions(User user) {
 		ArrayList<Transactions> list= new ArrayList<Transactions>();
 		list = transactionRepository.findAllByUser(user);
-		System.out.println("service " + list);
 		return list;
 	}
  
