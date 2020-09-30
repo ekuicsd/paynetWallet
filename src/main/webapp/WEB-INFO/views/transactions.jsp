@@ -13,7 +13,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link type ="text/css" rel="stylesheet" href="css/common.css">
 
-<script src="jquery3-4-1.js"></script>
 <script type="text/javascript" src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 
 </head>
@@ -42,6 +41,12 @@
 						<i class="material-icons" style="font-size:36px">arrow_back</i>
 					</a>
 					Your Transactions
+					<%if(user != null) { %>
+					<b class="float-right">
+						<img src="assets/money.png" alt="" style="margin-bottom: 12px;">
+							<b style="font-size:27px;"> Rs. <%=user.getWallet() %> /-</b>
+					</b>
+					<% } %>
 				</h1>
 				<table class="table table-hover table-striped mt-4">
 				  <thead>

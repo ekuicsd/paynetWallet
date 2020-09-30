@@ -1,7 +1,6 @@
 package com.paynet.wallet.service;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import com.paynet.wallet.model.User;
 import com.paynet.wallet.repository.TransactionRepository;
 import com.paynet.wallet.repository.UserRepository;
 import com.paynet.wallet.util.TransactionType;
+import com.paynet.wallet.util.SortByTransactionTime;
 
 @Service
 public class UserService {
@@ -61,6 +61,7 @@ public class UserService {
 	public ArrayList<Transactions> findAllTransactions(User user) {
 		ArrayList<Transactions> list= new ArrayList<Transactions>();
 		list = transactionRepository.findAllByUser(user);
+		Collections.sort(list, new SortByTransactionTime()); 
 		return list;
 	}
  

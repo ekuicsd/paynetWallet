@@ -12,7 +12,6 @@
 <link type ="text/css" rel="stylesheet" href="css/login.css">
 <link type ="text/css" rel="stylesheet" href="css/common.css">
 
-<script src="jquery3-4-1.js"></script>
 <script type="text/javascript" src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 
 </head>
